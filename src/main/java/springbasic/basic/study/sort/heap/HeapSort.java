@@ -14,6 +14,8 @@ import java.util.PriorityQueue;
  *
  */
 public class HeapSort {
+	// TODO 작업예정
+	
 	// 부모 인덱스를 얻는 함수
 	private static int getParent(int child) {
 		return (child - 1) / 2;
