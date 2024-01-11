@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class _25206 {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         double sum = 0.0;
         double sumGrade = 0.0;
-        String[] arrInput;
+        String[] arrInput = null;
 
         for(int i = 0; i < 20; i++) {
             arrInput = br.readLine().split(" ");
@@ -27,7 +26,6 @@ public class _25206 {
 
         br.close();
     }
-
     private static double score(String grade) {
         double rtn = 0.0;
 
