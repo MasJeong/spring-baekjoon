@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon;
+package springbasic.basic.study.baekjoon.bronze;
 
 import java.io.BufferedReader;
 import java.io.IOException;

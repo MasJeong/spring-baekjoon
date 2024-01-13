@@ -1,18 +1,17 @@
-package springbasic.basic.study.baekjoon;
+package springbasic.basic.study.baekjoon.bronze;
 
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class _27323 {
+public class _15894 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int num1 = Integer.parseInt(br.readLine());
-        int num2 = Integer.parseInt(br.readLine());
+        long num = Long.parseLong(br.readLine());
 
-        System.out.print(num1 * num2);
+        System.out.print(num * 4);
 
         br.close();
     }
