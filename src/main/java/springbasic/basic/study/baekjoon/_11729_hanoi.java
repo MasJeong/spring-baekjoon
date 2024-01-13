@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * 하노이 탑
  */
-public class _11729 {
+public class _11729_hanoi {
 
     private static StringBuffer sb = new StringBuffer();
 
