@@ -14,7 +14,7 @@ public class _5073 {
         int nMax = -1;
 
         for(int i = 0; i < strArr.length; i++) {
-            // TODO scanner 사용할 떄와 string[] to int 시 성능 확인
+            // TODO scanner 사용할 떄와 BufferedReader string[] to int 시 성능 확인
             String[] arrNum = br.readLine().split(" ");
             int num1 = Integer.parseInt(arrNum[0]);
             int num2 = Integer.parseInt(arrNum[1]);
