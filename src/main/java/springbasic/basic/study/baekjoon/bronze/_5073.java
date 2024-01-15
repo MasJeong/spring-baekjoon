@@ -1,54 +1,43 @@
 package springbasic.basic.study.baekjoon.bronze;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class _5073 {
-
-    private static int LENGTH = 5;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        String[] strArr = new String[LENGTH];
-        int nMax = -1;
+        while(true) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int[] arrInput = {
+                    Integer.parseInt(st.nextToken()),
+                    Integer.parseInt(st.nextToken()),
+                    Integer.parseInt(st.nextToken())
+            };
 
-        for(int i = 0; i < strArr.length; i++) {
-            // TODO scanner 사용할 떄와 string[] to int 시 성능 확인
-            String[] arrNum = br.readLine().split(" ");
-            int num1 = Integer.parseInt(arrNum[0]);
-            int num2 = Integer.parseInt(arrNum[1]);
-            int num3 = Integer.parseInt(arrNum[2]);
-
-            if(num1 == 0 && num2 == 0 && num3 == 0)
+            if(arrInput[0] == 0 && arrInput[1] == 0 && arrInput[2] == 0)
                 break;
 
-            // set max value
-            for(int j = 0; j < arrNum.length; j++) {
-                int num = Integer.parseInt(arrNum[j]);
-                if(nMax < num) {
-                    nMax = num;
-                }
-            }
+            Arrays.sort(arrInput);
 
-            if(nMax >= num1 + num2 || nMax >= num2 + num3 || nMax >= num1 + num3)
-                strArr[i] = "Invalid";
-            else if(num1 == num2 && num2 == num3)
-                strArr[i] = "Equilateral";
-            else if(num1 == num2 || num1 == num3 || num2 == num3)
-                strArr[i] = "Isosceles";
+            if(arrInput[0] + arrInput[1] <= arrInput[2])
+                bw.write("Invalid");
+            else if(arrInput[0] == arrInput[1] && arrInput[1] == arrInput[2])
+                bw.write("Equilateral");
+            else if(arrInput[0] == arrInput[1] || arrInput[1] == arrInput[2] || arrInput[0] == arrInput[2])
+                bw.write("Isosceles");
             else
-                strArr[i] = "Scalene";
+                bw.write("Scalene");
+
+            bw.write("\n");
         }
 
-        for(int i = 0; i < strArr.length - 2; i++)
-            bw.write(strArr[i] + "\n");
-
-        bw.write(strArr[strArr.length - 2]);
-
+        br.close();
         bw.flush();
         bw.close();
-        br.close();
     }
 
 }
