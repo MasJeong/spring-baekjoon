@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 /**
- * 체스판 다시 칠하기 - 브루트 포스
+ * TODO 다시풀기 체스판 다시 칠하기 - 브루트 포스
  */
 public class _1018 {
 
@@ -15,7 +15,6 @@ public class _1018 {
 
         int row = Integer.parseInt(st.nextToken());
         int col = Integer.parseInt(st.nextToken());
-        int cnt = 0; // 이상 갯수
         boolean[][] board = new boolean[row][col];
 
         // 입력
@@ -28,24 +27,29 @@ public class _1018 {
         }
 
         // 8 * 8 로 for문 계속 돌아서 잘못된 갯수가 작은 경우를 출력
-        for(int i = 0; i < row - 8; i++)
-            for(int j = 0; j < col - 8; j++) {
+        int result = 64;
+        for(int i = 0; i < row - 7; i++)
+            for(int j = 0; j < col - 7; j++) {
                 // 첫 번째 칸 색
                 boolean firstBoard = board[i][j];
+                int cnt = 0;
                 for (int k = i; k < i + 8; k++) {
                     for (int n = j; n < j + 8; n++) {
                         if (board[k][n] != firstBoard)
                             cnt++;
 
-                        firstBoard = !firstBoard;
+                        firstBoard = (!firstBoard);
                     }
 
-                    firstBoard = !firstBoard;
+                    firstBoard = (!firstBoard);
                 }
+
+                cnt = Math.min(cnt, 64 - cnt);
+                result = Math.min(result, cnt);
             }
 
         br.close();
-        bw.write(cnt);
+        bw.write(Integer.toString(result));
         bw.flush();
         bw.close();
     }
