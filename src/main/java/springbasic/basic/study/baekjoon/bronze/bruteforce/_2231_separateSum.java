@@ -1,13 +1,12 @@
-package springbasic.basic.study.baekjoon.bronze;
+package springbasic.basic.study.baekjoon.bronze.bruteforce;
 
 import java.io.*;
-import java.util.StringTokenizer;
 
 /**
- * 분해합
+ * TODO 분해합
  * 자연수 245(n)의 분해합은 256(2+4+5)(m)
  */
-public class _2231 {
+public class _2231_separateSum {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

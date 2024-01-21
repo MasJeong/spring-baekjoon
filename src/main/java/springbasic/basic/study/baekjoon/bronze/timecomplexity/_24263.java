@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon.bronze;
+package springbasic.basic.study.baekjoon.bronze.timecomplexity;
 
 import java.io.IOException;
 import java.util.Scanner;
