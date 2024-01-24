@@ -1,7 +1,6 @@
 package springbasic.basic.study.baekjoon.silver.greedy;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -21,21 +20,21 @@ public class _11399 {
         StringTokenizer st;
 
         int n = Integer.parseInt(br.readLine());
-        int[] p = new int[n];
         int time = 0;
         int min = 0;
+        int[] p = new int[1001];
 
         // 입력
         st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < p.length; i++)
-            p[i] = Integer.parseInt(st.nextToken());
+        while(n-- > 0)
+            p[Integer.parseInt(st.nextToken())]++;
 
-        // TODO 수의 범위가 1000밖에 되지 않으니 카운팅정렬 사용해보자
-        Arrays.sort(p);
-
+        // counting sort
         for(int i = 0; i < p.length; i++) {
-            time += p[i];
-            min += time;
+            while(p[i]-- > 0) {
+                time += i;
+                min += time;
+            }
         }
 
         br.close();
