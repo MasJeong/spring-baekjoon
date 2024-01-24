@@ -3,7 +3,7 @@ package springbasic.basic.study.baekjoon.silver.greedy;
 import java.io.*;
 
 /**
- * TODO 설탕배달
+ * 설탕배달
  * 그리디 알고리즘이란
  * - 선택의 순간마다 당장 눈 앞에 보이는 최적의 상황을 쫓아 최적해를 구하는 알고리즘
  * - 순간마다 최선을 선택했다고 하나 최종적인 해답에서 최적이라고 보장은 없다.
@@ -22,11 +22,17 @@ public class _2839 {
 
         while(n > 0) {
             if(n % 5 == 0) {
-                cnt = n / 5;
+                cnt += n / 5;
                 break;
-
-
             }
+
+            if(n < 3) {
+                cnt = -1;
+                break;
+            }
+
+            n -= 3;
+            cnt++;
         }
 
         br.close();
