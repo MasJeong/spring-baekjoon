@@ -1,7 +1,5 @@
 package springbasic.basic.study.baekjoon.silver.greedy;
 
-import org.springframework.util.StringUtils;
-
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -15,46 +13,25 @@ import java.util.StringTokenizer;
  * 2) 문제에 대한 최종 해결 방법은 부분 문제에 대한 최적 문제 해결 방법으로 구성된다.
  */
 public class _1541__lostParenthesis {
-
+    // TODO 진행중
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine(), "-");
 
-        String[] arr = new String[25];
-        int idx = 0;
-        int result = 0 ;
-
-        int[] arrTemp = new int[25];
+        int result = 0;
 
         while(st.hasMoreTokens()) {
-            arr[idx++] = st.nextToken();
-        }
 
-        for(int i = 0; i < arr.length; i++) {
-            if(StringUtils.hasText(arr[i])) {
-                if(arr[i].contains("+")) {
-                    st = new StringTokenizer(arr[i], "+");
+            StringTokenizer st2 = new StringTokenizer(st.nextToken(), "+");
+            int sum = 0;
 
-                    int idx2 = 0;
-                    while(st.hasMoreTokens()) {
-                        arrTemp[idx2++] = Integer.parseInt(st.nextToken());
-                    }
-
-                    int temp = 0;
-                    for(int j = 0; j < arrTemp.length; j++) {
-                        temp += arrTemp[j];
-                    }
-
-                    // TODO 모두 +인 경우 여기서 음수 처리된다. 수정필요
-                    result -= temp;
-                } else {
-                    result += Integer.parseInt(arr[i]);
-                }
+            while(st2.hasMoreTokens()) {
+                sum += Integer.parseInt(st2.nextToken());
             }
-        }
 
-        // 00009와 같은 숫자에 대한 처리가 필요하다.
+//            result = Integer.parseInt(n) - result;
+        }
 
         br.close();
         bw.write(result + "");
