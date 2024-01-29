@@ -13,28 +13,30 @@ import java.util.StringTokenizer;
  * 2) 문제에 대한 최종 해결 방법은 부분 문제에 대한 최적 문제 해결 방법으로 구성된다.
  */
 public class _1541__lostParenthesis {
-    // TODO 진행중
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine(), "-");
 
-        int result = 0;
+        int result = Integer.MAX_VALUE;
 
+        // 최고값이 될
         while(st.hasMoreTokens()) {
-
             StringTokenizer st2 = new StringTokenizer(st.nextToken(), "+");
-            int sum = 0;
+            int temp = 0;
 
-            while(st2.hasMoreTokens()) {
-                sum += Integer.parseInt(st2.nextToken());
-            }
+            while(st2.hasMoreTokens())
+                temp += Integer.parseInt(st2.nextToken());
 
-//            result = Integer.parseInt(n) - result;
+            if(result == Integer.MAX_VALUE)
+                result = temp;
+            else
+                result -= temp;
         }
 
         br.close();
-        bw.write(result + "");
+        bw.write(Integer.toString(result));
         bw.flush();
         bw.close();
     }
