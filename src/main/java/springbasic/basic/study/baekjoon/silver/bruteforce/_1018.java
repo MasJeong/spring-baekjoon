@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon.silver;
+package springbasic.basic.study.baekjoon.silver.bruteforce;
 
 import java.io.*;
 import java.util.StringTokenizer;
