@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon.bronze;
+package springbasic.basic.study.baekjoon.bronze.geometry;
 
 
 import java.io.BufferedReader;

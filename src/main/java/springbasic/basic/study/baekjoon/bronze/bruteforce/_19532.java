@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon.bronze;
+package springbasic.basic.study.baekjoon.bronze.bruteforce;
 
 import java.io.*;
 import java.util.Arrays;

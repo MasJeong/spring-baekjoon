@@ -39,8 +39,12 @@ public class _11651 {
         // 출력
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < n; i++) {
-            sb.append(position[i][0] + " " + position[i][1]).append('\n');
+            sb.append(position[i][0])
+                    .append(" ")
+                    .append(position[i][1])
+                    .append('\n');
         }
+
         System.out.println(sb);
 
         br.close();

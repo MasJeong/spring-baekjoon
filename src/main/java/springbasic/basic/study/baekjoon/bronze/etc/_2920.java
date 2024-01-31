@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon.bronze;
+package springbasic.basic.study.baekjoon.bronze.etc;
 
 import java.io.*;
 import java.util.StringTokenizer;
