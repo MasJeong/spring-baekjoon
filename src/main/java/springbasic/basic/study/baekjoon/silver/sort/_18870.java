@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
- * 좌표 정렬하기2 - 정렬
+ * 좌표 압축 - 정렬
  */
-public class _11651 {
+public class _18870 {
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -1,19 +1,18 @@
-package springbasic.basic.study.baekjoon.bronze;
-
+package springbasic.basic.study.baekjoon.bronze.etc;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class _27323 {
+public class _9086 {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int num1 = Integer.parseInt(br.readLine());
-        int num2 = Integer.parseInt(br.readLine());
+        String str = br.readLine();
+        int n = Integer.parseInt(br.readLine()) - 1;
 
-        System.out.print(num1 * num2);
-
+        System.out.println(str.charAt(n));
         br.close();
     }
 }

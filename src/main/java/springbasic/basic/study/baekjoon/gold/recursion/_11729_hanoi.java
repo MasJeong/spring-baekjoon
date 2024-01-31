@@ -1,9 +1,9 @@
-package springbasic.basic.study.baekjoon.gold;
+package springbasic.basic.study.baekjoon.gold.recursion;
 
 import java.io.*;
 
 /**
- * 하노이 탑
+ * 하노이 탑 TODO RETRY
  */
 public class _11729_hanoi {
 
