@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 /**
@@ -34,7 +33,6 @@ public class _18870 {
         int n = Integer.parseInt(br.readLine());
         int[] position = new int[n];
         int[] tempArr = new int[n];
-        int count = 0;
 
         // 입력
         st = new StringTokenizer(br.readLine());
@@ -47,21 +45,23 @@ public class _18870 {
         // 정렬
         Arrays.sort(tempArr);
 
-        // TODO 마저 진행하자. 2중 for문으로 값을 찾는 것 말고 다른 방법을 찾아보자 없으면 HashMap 사용 (검색에 빠름...)
         /*
             HashMap 검색속도 O(1)
             List 검색속도 O(n) - 정렬된 경우 이진탐색을 사용하여 O(log n)
          */
-        for(int i = 0; i < position.length; i++) {
-//            if(position[i] == tempArr) {
-//
-//            }
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int cnt = 0;
+        for(int i = 0; i < n; i++) {
+//            if(map.get(tempArr[i]) == null) {
+            if(!map.containsKey(tempArr[i])) {
+                map.put(tempArr[i], cnt++);
+            }
         }
 
         // 출력
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < n; i++) {
-            sb.append(position[i])
+            sb.append(map.get(position[i]))
                     .append(" ");
         }
 
