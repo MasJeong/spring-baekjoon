@@ -17,6 +17,7 @@ public class _11653 {
         if(n == 1) return;
 
         StringBuilder sb = new StringBuilder();
+        // 어떤 N이 두 개이상 곱셈(인수)으로 나타낼 수 있을 때 인수 중 한 개 이상은 반드시 √N보다 작거나 같음
         for(int i = 2; i <= Math.sqrt(n); i++) {
             while(n % i == 0) {
                 sb.append(i).append('\n');
