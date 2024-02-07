@@ -14,8 +14,6 @@ public class _10816_useBinarySearch {
         int left = 0;
         int right = list.size() - 1;
 
-
-
         while(left <= right) {
             int mid = (right + left) / 2;
 
