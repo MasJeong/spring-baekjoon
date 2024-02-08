@@ -10,76 +10,64 @@ import java.util.*;
  */
 public class _10816_useBinarySearch {
 
-    private static int binarySearch(List<Integer> list, int target) {
+    // lowerBound = 타겟 숫자 이상의 값을 가진 인덱스
+    private static int lowerBoundBinarySearch(int[] target, int targetNum) {
         int left = 0;
-        int right = list.size() - 1;
+        int right = target.length;
 
-        while(left <= right) {
-            int mid = (right + left) / 2;
+        while(left < right) {
+            int mid = (left + right) / 2;
 
-            if(list.get(mid) < target) {
-                left = mid + 1;
-            } else if(list.get(mid) > target) {
-                right = mid - 1;
+            if(targetNum <= target[mid]) {
+                right = mid;
             } else {
-                /*
-                    remove하는 경우 반례가 발생함
-                    1
-                    1
-                    2
-                    1 1
-                    정답: 1 1
-                    list.remove(mid);
-                 */
-
-                return 1;
+                left = mid + 1;
             }
         }
 
-        return 0;
+        return left;
+    }
+
+    private static int upperBoundBinarySearch(int[] target, int targetNum) {
+        int left = 0;
+        int right = target.length;
+
+        while(left < right) {
+            int mid = (left + right) / 2;
+
+            if(targetNum >= target[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return right;
     }
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = null;
 
         int n = Integer.parseInt(br.readLine());
+        int[] target = new int[n];
 
-        // 입력
-        HashMap<Integer, Integer> mapTarget = new HashMap<>();
-        HashMap<Integer, Integer> mapSearch = new HashMap<>();
-        st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < n; i++) {
-            mapTarget.put(i, Integer.parseInt(st.nextToken()));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        while(n-- > 0) {
+            target[n] = Integer.parseInt(st.nextToken());
         }
+
+        Arrays.sort(target);
 
         int m = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
         st = new StringTokenizer(br.readLine());
 
-        for(int i = 0; i < m; i++) {
-            mapSearch.put(i, Integer.parseInt(st.nextToken()));
-        }
+        while(m-- > 0) {
+            int num = Integer.parseInt(st.nextToken());
+            int idx1 = lowerBoundBinarySearch(target, num);
+            int idx2 = upperBoundBinarySearch(target, num);
 
-        // 정렬
-        List<Integer> targetList = new ArrayList<>(mapTarget.values());
-        targetList.sort(Integer::compareTo);
-
-        int[] result = new int[m];
-
-        // 이진탐색
-        for(int i = 0; i < mapSearch.size(); i++) {
-            int searchResult = 1;
-
-            while(searchResult == 1) {
-                searchResult = binarySearch(targetList, mapSearch.get(i));
-                result[i]+= searchResult;
-            }
-        }
-
-        // 출력
-        StringBuilder sb = new StringBuilder();
-        for (int j : result) {
-            sb.append(j).append(" ");
+            sb.append(idx2 - idx1).append(" ");
         }
 
         System.out.println(sb);
