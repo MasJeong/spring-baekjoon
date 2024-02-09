@@ -70,7 +70,6 @@ public class _10816_useBinarySearchRetry {
         int n = Integer.parseInt(br.readLine());
         int[] target = new int[n];
 
-        // 입력
         StringTokenizer st = new StringTokenizer(br.readLine());
         while(n-- > 0) {
             target[n] = Integer.parseInt(st.nextToken());
@@ -91,7 +90,6 @@ public class _10816_useBinarySearchRetry {
             sb.append(right - left).append(" ");
         }
 
-        // 출력
         System.out.println(sb);
 
         br.close();
