@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class _10816_useBinarySearch {
 
-    // lowerBound = 타겟 숫자 이상의 값을 가진 인덱스
     private static int lowerBoundBinarySearch(int[] target, int targetNum) {
         int left = 0;
         int right = target.length;
