@@ -20,7 +20,7 @@ public class _9012 {
         size++;
     }
 
-    private static boolean pop(char[] stack) {
+    private static boolean pop() {
         if(pointer < 0) {
             sb.append("NO").append("\n");
             return true;
@@ -57,7 +57,7 @@ public class _9012 {
                 if (c == '(') {
                     push(stack, c);
                 } else {
-                    popError = pop(stack);
+                    popError = pop();
                     if(popError) break;
                 }
             }
