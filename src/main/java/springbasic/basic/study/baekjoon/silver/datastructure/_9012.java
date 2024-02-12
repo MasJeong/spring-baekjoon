@@ -36,7 +36,7 @@ public class _9012 {
         return size <= 0;
     }
 
-    private static void initStack(char[] stack) {
+    private static void initStack() {
         pointer = -1;
         size = 0;
     }
@@ -71,7 +71,7 @@ public class _9012 {
             }
 
             // 스택 초기화
-            initStack(stack);
+            initStack();
         }
 
         System.out.println(sb);
