@@ -13,7 +13,7 @@ public class _9012 {
     private static int pointer = -1;
     private static int size = 0;
 
-    private static StringBuilder sb = new StringBuilder();
+    private static final StringBuilder sb = new StringBuilder();
 
     private static void push(char[] stack, char val) {
         stack[++pointer] = val;
