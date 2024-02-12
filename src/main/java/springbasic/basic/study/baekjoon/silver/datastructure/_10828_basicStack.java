@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 /**
  * 스택 - 자료구조
  */
-public class _10828 {
+public class _10828_basicStack {
 
     private static int pointer = -1;
     private static int size = 0;
