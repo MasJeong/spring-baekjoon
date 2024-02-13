@@ -49,12 +49,29 @@ public class _1874 {
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
         StringBuilder sb = new StringBuilder();
+
+        /*
+            push, push, push, push, pop, pop, push, push, pop, push, push, pop, pop, pop, pop, pop
+            [4, 3, 6, 8, 7, 5, 2, 1]
+         */
 
         int n = Integer.parseInt(br.readLine());
         int[] stack = new int[n];
+        int num = 1;
 
+        for(int i = 0; i < n; i++) {
+            int input = Integer.parseInt(br.readLine());
+
+            // TODO 위 주석처리된 예제를 해당하게 소스 작성해보자 
+            if (top(stack) == num) {
+                pop(stack);
+                sb.append("-").append("\n");
+            } else {
+                push(stack, num++);
+                sb.append("+").append("\n");
+            }
+        }
 
         System.out.println(sb);
         br.close();
