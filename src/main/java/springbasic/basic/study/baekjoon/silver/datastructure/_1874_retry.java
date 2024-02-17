@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * 스택 수열 - 자료구조 TODO 다시풀기
+ * 스택 수열 - 자료구조
  */
 public class _1874_retry {
 
@@ -24,10 +24,6 @@ public class _1874_retry {
 
         size--;
         return stack[pointer--];
-    }
-
-    private static int size() {
-        return size;
     }
 
     private static int empty() {
@@ -57,6 +53,28 @@ public class _1874_retry {
         int n = Integer.parseInt(br.readLine());
         int[] stack = new int[n];
         int startIdx = 0;
+
+        while (n-- > 0) {
+            int num = Integer.parseInt(br.readLine());
+
+            if (top(stack) < num) {
+                for(int i = startIdx + 1; i <= num; i++) {
+                    push(stack, i);
+                    sb.append("+").append("\n");
+                }
+
+                startIdx = num;
+            }
+
+            if (top(stack) == num) {
+                pop(stack);
+                sb.append("-").append("\n");
+            } else if(top(stack) != num) {
+                System.out.println("NO");
+                return;
+            }
+        }
+
 
         System.out.println(sb);
         br.close();
