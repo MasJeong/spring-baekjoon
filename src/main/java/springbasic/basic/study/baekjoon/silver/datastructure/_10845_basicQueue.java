@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 /**
  * 큐 - 자료구조
  * 큐 구현 후 원형 큐(front, rear)까지 생각해서 진행해보자.
+ * - 큐는 BFS(너비우선탐색)에서 자주 사용된다.
  */
 public class _10845_basicQueue {
 
@@ -20,13 +21,13 @@ public class _10845_basicQueue {
         size++;
     }
 
-    private static int pop(int[] stack) {
+    private static int pop(int[] queue) {
         if(front > rear) {
             return -1;
         }
 
         size--;
-        return stack[front++];
+        return queue[front++];
     }
 
     private static int size() {
