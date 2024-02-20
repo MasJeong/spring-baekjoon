@@ -6,10 +6,21 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * 큐 - 자료구조
- * 원형큐 구현 - 용량을 동적 할당하는 메소드까지 구현한다.
+ * 요세푸스 - 자료구조(큐)
  */
-public class _10845_circularQueue {
+public class _1158 {
+
+    /*
+        1 2 3 4 5 6 7
+        1 2 '' 4 5 6 7
+        1 2 '' 4 5 '' 7
+        1 '' '' 4 5 '' 7
+        1 '' '' 4 5 '' ''
+        1 '' '' 4 '' '' ''
+        '' '' '' 4 '' '' ''
+        '' '' '' '' '' '' ''
+        -> 3 6 2 7 5 1 4
+     */
 
     private static int[] queue;
 
@@ -32,14 +43,17 @@ public class _10845_circularQueue {
             새로운 큐에는 front가 0이고 첫 번째 인덱스부터 값을 세팅한다.
          */
         for (int i = 1, j = front + 1; i <= size; i++, j++) {
-            newQueue[i] = queue[j % size];
+            newQueue[i] = queue[j % queue.length];
         }
 
         queue = newQueue;
 
         front = 0;
 
-        // 용량이 더 커졌기 때문에 1자로 데이터가 나열되었기 때문에 rear = size
+        /*
+            용량이 더 커진 경우에는 1자로 데이터가 나열되었기 때문에 rear = size
+            용량이 더 작아진 경우에는 데이터가 없어서 사이즈를 줄인 것.
+         */
         rear = size;
     }
 
@@ -73,7 +87,7 @@ public class _10845_circularQueue {
         int element = queue[front];
 
         queue[front] = 0;
-
+        size--;
 
         // 요소 개수가 1/4 미만일 경우 용량(사이즈)를 1/2로 줄인다.
         if(size < (queue.length / 4)) {
@@ -81,13 +95,22 @@ public class _10845_circularQueue {
         }
 
         return element;
+    }
 
-//        if(front > rear) {
-//            return -1;
-//        }
-//
-//        size--;
-//        return queue[front++];
+    /**
+     * 큐의 첫 번째 요소를 삭제한다.
+     * @return 삭제된 요소 값
+     */
+    private static int remove() {
+        int element = poll();
+
+        // 원래 queue가 객체 타입이면 null을 체크하지만 int 타입이기 때문에 0으로 체크한다.
+        if (element == 0) {
+            return -1;
+//            throw new NoSuchElementException();
+        }
+
+        return element;
     }
 
     private static int size() {
@@ -111,7 +134,7 @@ public class _10845_circularQueue {
             return -1;
         }
 
-        return queue[front];
+        return queue[(front + 1) % queue.length];
     }
 
     private static int front() {
@@ -119,7 +142,7 @@ public class _10845_circularQueue {
             return -1;
         }
 
-        return queue[front];
+        return queue[(front + 1) % queue.length];
     }
 
     private static int back() {
@@ -127,7 +150,7 @@ public class _10845_circularQueue {
             return -1;
         }
 
-        return queue[rear];
+        return queue[(rear) % queue.length];
     }
 
     public static void main(String[] args) throws IOException{
@@ -154,6 +177,9 @@ public class _10845_circularQueue {
                     break;
                 case "empty":
                     sb.append(empty()).append("\n");
+                    break;
+                case "peek":
+                    sb.append(peek()).append("\n");
                     break;
                 case "front":
                     sb.append(front()).append("\n");
