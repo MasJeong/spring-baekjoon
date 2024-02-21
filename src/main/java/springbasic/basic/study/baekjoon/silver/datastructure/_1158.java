@@ -79,15 +79,11 @@ public class _1158 {
         }
 
         sb.append("<");
-        for(int i = 0; i < n; i++) {
-            sb.append(poll(k));
-
-            if (i != n - 1) {
-                sb.append(", ");
-            }
+        while (n-- > 1) {
+            sb.append(poll(k)).append(", ");
         }
+        sb.append(poll(k)).append(">");
 
-        sb.append(">");
         System.out.println(sb);
         br.close();
     }
