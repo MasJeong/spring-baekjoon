@@ -6,24 +6,39 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * 에디터 - 자료구조 // TODO 집에 가서 다시 풀자... 쉬운 것 같은데 집중이 안된다...
+ * 에디터 - 자료구조
  */
 public class _1406 {
 
+    private static char[] stack;
     private static int pointer = -1;
     private static int size = 0;
 
-    private static void push(char[] stack, char val) {
+    private static void push(char val) {
+        // L 겁나 눌러서 pointer 음수이면 맨 앞에 1개 데이터세팅
+        if (pointer < 0) {
+            char[] newStack = new char[stack.length];
+
+            for (int i = 0; i < size; i++) {
+                newStack[i + 1] = stack[i];
+            }
+
+            stack = newStack;
+
+            pointer = -1;
+        }
+
         stack[++pointer] = val;
         size++;
     }
 
-    private static int pop(char[] stack) {
+    private static int pop() {
         if(pointer < 0) {
             return -1;
         }
 
         size--;
+        stack[pointer] = '\0';
         return stack[pointer--];
     }
 
@@ -31,15 +46,7 @@ public class _1406 {
         return size;
     }
 
-    private static int empty() {
-        if(size <= 0) {
-            return 1;
-        }
-
-        return 0;
-    }
-
-    private static int top(char[] stack) {
+    private static int top() {
         if(size <= 0) {
             return -1;
         }
@@ -60,13 +67,13 @@ public class _1406 {
          */
         String n = br.readLine();
         int m = Integer.parseInt(br.readLine());
-        char[] stack = new char[n.length() + m];
+        stack = new char[n.length() + m];
         StringTokenizer st;
 
         // 처음 입력받은 문자열 push
         for (int i = 0; i < n.length(); i++) {
             char ch = n.charAt(i);
-            push(stack, ch);
+            push(ch);
         }
 
         while (m-- > 0) {
@@ -75,34 +82,30 @@ public class _1406 {
 
             switch (cmd) {
                 case 'L':
-                    if (pointer > 0) {
-                        pointer--;
-                    }
+                    if (pointer < 0) break;
+
+                    // Todo L: 왼쪽 공백푸쉬, R: 오른쪽 공백푸쉬로 진행해보자 
+                    // 요솟수가 존재한다면 우측으로 1칸씩 옮겨준다.
+//                    if(stack[pointer] != '\0') {
+//                        for (int i = pointer; i < size; i++) {
+//                            char temp = stack[i + 1];
+//                            stack[i + 1] = stack[i];
+//                            stack[i] = temp;
+//                        }
+//                    }
+
+                    pointer--;
                     break;
                 case 'D':
-                    if(pointer + 1 != size()) {
-                        pointer++;
-                    }
+                    pointer++;
                     break;
                 case 'B':
-                    pop(stack);
+                    if (pointer < 0) break;
+
+                    pop();
                     break;
                 case 'P':
-                    if(pointer + 1 != size()) {
-                        // push 전에 1칸씩 뒤로 다 미뤄야 함
-                        for (int i = pointer + 1; i < size(); i++) {
-                            char temp = stack[i];
-                            stack[i] = stack[i + 1];
-                            stack[i + 1] = temp;
-                        }
-
-                        // TODO 이것도 생각해보자
-                        // 위 포문에서 pointer + 1을 pointer로 변경하고 pointer를 1로 낮춘 후 push
-                        // 즉, for문을 이용해 문자들 뒤로 밀고 앞 1자리 생긴 공간에 push를 하려고 해보자.
-                        push(stack, st.nextToken().charAt(0));
-                    } else {
-                        push(stack, st.nextToken().charAt(0));
-                    }
+                    push(st.nextToken().charAt(0));
                     break;
             }
         }
