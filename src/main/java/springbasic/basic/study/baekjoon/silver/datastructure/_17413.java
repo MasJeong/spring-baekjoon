@@ -3,47 +3,46 @@ package springbasic.basic.study.baekjoon.silver.datastructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
- * 단어 뒤집기 2 - 자료구조 TODO 진행중~
+ * 단어 뒤집기 2 - 자료구조 TODO 진행중
  */
 public class _17413 {
-
-    private static char[] stack;
-    private static int pointer = -1;
-    private static int size = 0;
-
-    private static void push(char val) {
-        stack[++pointer] = val;
-        size++;
-    }
-
-    private static char pop() {
-        if(pointer < 0) {
-            return '\0';
-        }
-
-        size--;
-        return stack[pointer--];
-    }
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();
 
+        Stack<Character> firstStack = new Stack<>();
+
         String s = br.readLine();
 
-        stack = new char[s.length()];
+        // 괄호 없는 경우
+        if (!s.contains("<")) {
+            st = new StringTokenizer(s);
+            while (st.hasMoreTokens()) {
+                String token = st.nextToken();
 
-        // 조건 if 안에 for문 안에 StringTokenizer
-        for (int i = 0; i < s.length(); i++) {
+                for (int i = 0; i < token.length(); i++) {
+                    firstStack.push(token.charAt(i));
+                }
 
+                for (int i = 0; i < token.length(); i++) {
+                    sb.append(firstStack.pop());
+                }
+                sb.append(" ");
+            }
+
+            System.out.println(sb);
+            br.close();
+            return;
         }
 
 
-        System.out.println(sb);
+//        System.out.println(String.valueOf(arr));
         br.close();
     }
 }
