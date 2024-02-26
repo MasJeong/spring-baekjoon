@@ -15,17 +15,6 @@ import java.util.StringTokenizer;
  */
 public class _18870 {
 
-    /**
-     * 이진탐색 구현 - Arrays.binarySearch()
-     */
-//    private static void binarySearch(int[] temp) {
-//        int left = 0;
-//        int right = temp.length - 1;
-//        while(left <= right) {
-//
-//        }
-//    }
-
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = null;
@@ -52,7 +41,6 @@ public class _18870 {
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         int cnt = 0;
         for(int i = 0; i < n; i++) {
-//            if(map.get(tempArr[i]) == null) {
             if(!map.containsKey(tempArr[i])) {
                 map.put(tempArr[i], cnt++);
             }
