@@ -3,8 +3,7 @@ package springbasic.basic.study.baekjoon.silver.datastructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
@@ -17,9 +16,18 @@ import java.util.StringTokenizer;
  * -> 시간초과
  * 3. LinkedList 및 ListIterator 사용
  * -> 통과
+ * 4. Stack 2개 사용
+ * - L: left pop, right push
+ * - D: right pop, left push
+ * - B: left pop
+ * - P: left push
+ * - 출력: left 스택은 밑에서, right 스택은 위에서부터 출력한다.
+ * -> 통과
  */
-public class _1406 {
-    private static final LinkedList<Character> linkedList= new LinkedList<>();
+public class _1406_useTwoStack {
+    private static final Stack<Character> leftStack = new Stack<>();
+
+    private static final Stack<Character> rightStack = new Stack<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,14 +39,7 @@ public class _1406 {
 
         // 처음 입력받은 문자열 push
         for (int i = 0; i < n.length(); i++) {
-            linkedList.add(n.charAt(i));
-        }
-
-        // ListIterator 사용. 좌우 인덱스를 체크할 수 있음.
-        ListIterator<Character> listIterator = linkedList.listIterator();
-
-        while (listIterator.hasNext()) {
-            listIterator.next();
+            leftStack.push(n.charAt(i));
         }
 
         while (m-- > 0) {
@@ -47,28 +48,34 @@ public class _1406 {
 
             switch (cmd) {
                 case 'L':
-                    if (listIterator.hasPrevious()) {
-                        listIterator.previous();
+                    if (leftStack.isEmpty()) {
+                        break;
                     }
+                    rightStack.push(leftStack.pop());
                     break;
                 case 'D':
-                    if (listIterator.hasNext()) {
-                        listIterator.next();
+                    if (rightStack.isEmpty()) {
+                        break;
                     }
+                    leftStack.push(rightStack.pop());
                     break;
                 case 'B':
-                    if (listIterator.hasPrevious()) {
-                        listIterator.previous();
-                        listIterator.remove();
+                    if (leftStack.isEmpty()) {
+                        break;
                     }
+                    leftStack.pop();
                     break;
                 case 'P':
-                    listIterator.add(st.nextToken().charAt(0));
+                    leftStack.push(st.nextToken().charAt(0));
                     break;
             }
         }
 
-        linkedList.forEach(sb::append);
+        leftStack.forEach(sb::append);
+
+        while (!rightStack.isEmpty()) {
+            sb.append(rightStack.pop());
+        }
 
         System.out.println(sb);
         br.close();
