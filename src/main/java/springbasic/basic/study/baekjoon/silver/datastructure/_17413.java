@@ -10,8 +10,7 @@ import java.util.StringTokenizer;
  */
 public class _17413 {
 
-    private static int MAX_LENGTH = 100000;
-    private static char[] stack = new char[MAX_LENGTH];
+    private static char[] stack;
     private static int pointer = -1;
     private static int size = 0;
 
@@ -35,6 +34,8 @@ public class _17413 {
         StringBuilder sb = new StringBuilder();
 
         String s = br.readLine();
+
+        stack = new char[s.length()];
 
         // 조건 if 안에 for문 안에 StringTokenizer
         for (int i = 0; i < s.length(); i++) {
