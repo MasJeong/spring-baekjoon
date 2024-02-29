@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
  * - 출력: left 스택은 밑에서, right 스택은 위에서부터 출력한다.
  * -> 통과
  */
-public class _1406_useTwoStack {
+public class _1406_anotherSolving {
     private static final Stack<Character> leftStack = new Stack<>();
 
     private static final Stack<Character> rightStack = new Stack<>();
