@@ -1,4 +1,4 @@
-package springbasic.basic.study.baekjoon.silver.datastructure;
+package springbasic.basic.study.baekjoon.gold.datastructure;
 
 import java.io.BufferedReader;
 import java.io.IOException;
