@@ -50,9 +50,10 @@ public class _17298_anotherSolving {
         }
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < N; i++) {
+        for(int i = 0; i < N - 1; i++) {
             sb.append(seq[i]).append(' ');
         }
+        sb.append(seq[N - 1]);
 
         System.out.println(sb);
         br.close();
