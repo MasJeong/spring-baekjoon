@@ -5,9 +5,9 @@ import java.io.*;
 /**
  * 하노이 탑 TODO RETRY
  */
-public class _11729_hanoi {
+public class _11729 {
 
-    private static StringBuffer sb = new StringBuffer();
+    private static final StringBuffer sb = new StringBuffer();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +31,10 @@ public class _11729_hanoi {
         if(n > 1)
             hanoi(n - 1, x, 6 - x - y);
 
-        sb.append(x + " " + y).append("\n");
+        sb.append(x)
+                .append(" ")
+                .append(y)
+                .append("\n");
 
         // 2 -> 3
         if(n > 1)
