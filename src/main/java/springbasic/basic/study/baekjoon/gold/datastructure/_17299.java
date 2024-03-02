@@ -3,103 +3,61 @@ package springbasic.basic.study.baekjoon.gold.datastructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
- * 오등큰수 - 자료구조 TODO 작업예정
+ * 오등큰수 - 자료구조
  */
 public class _17299 {
-
-    private static int[] stack;
-    private static int[] memoStack;
-    private static int pointer = -1;
-    private static int memoPointer = -1;
-    private static int size = 0;
-    private static int memoSize = 0;
-
-    private static void push(int val) {
-        stack[++pointer] = val;
-        size++;
-    }
-
-    private static int pop() {
-        if(pointer < 0) {
-            return -1;
-        }
-
-        size--;
-        return stack[pointer--];
-    }
-
-    private static void memoPush(int val) {
-        memoStack[++memoPointer] = val;
-        memoSize++;
-    }
-
-    private static int memoPop() {
-        if(memoPointer < 0) {
-            return -1;
-        }
-
-        memoSize--;
-        return memoStack[memoPointer--];
-    }
-
-    private static void initMemo() {
-        memoSize++;
-        memoPointer = memoSize - 1;
-    }
 
     public static void main(String[] args) throws IOException{
         final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         final StringBuilder sb = new StringBuilder();
+        final int COUNTING_MAX_SIZE = 1000001;
 
         int n = Integer.parseInt(br.readLine());
-        stack = new int[n];
-        memoStack = new int[n];
-
-        int[] result = new int[n];
-
         final StringTokenizer st = new StringTokenizer(br.readLine());
 
-        while (n-- > 0) {
-            push(Integer.parseInt(st.nextToken()));
+        Stack<Integer> stack = new Stack<>();
+        // 원본배열
+        int[] arrOriginal = new int[n];
+        // 카운팅 배열
+        int[] arrCounting = new int[COUNTING_MAX_SIZE];
+        // 결과 배열
+        int[] answer = new int[n];
+
+        /*
+         * 1 1 2 3 4 2 1 - 원본
+         * 3 3 2 1 1 2 3 - 카운팅
+         * -1 -1 1 2 2 1 -1
+         */
+        for (int i = 0; i < n; i++) {
+            int input = Integer.parseInt(st.nextToken());
+
+            // 원본 배열 세팅
+            arrOriginal[i] = input;
+
+            // 카운팅 배열 세팅
+            arrCounting[arrOriginal[i]]++;
         }
 
-        // 첫 번째로 빼는 값은 무조건 -1
-        int one = pop();
-        memoPush(one);
-        result[0] = -1;
-
-        int idx = 1;
-        while (size > 0) {
-            int a = pop();
-
-            boolean isFind = false;
-            while (memoSize > 0) {
-                int b = memoPop();
-                if (a < b) {
-                    result[idx++] = b;
-                    initMemo();
-                    isFind = true;
-                    break;
-                }
+        for(int i = 0; i < n; i++) {
+            while(!stack.isEmpty() && arrCounting[arrOriginal[stack.peek()]] < arrCounting[arrOriginal[i]]) {
+                answer[stack.pop()] = arrOriginal[i];
             }
 
-            if(!isFind) {
-                result[idx++] = -1;
-
-                // memo 스택 포인터를 다시 맨 위로 올린다.
-                initMemo();
-            }
-
-            memoPush(a);
+            stack.push(i);
         }
 
-        for (int i = result.length - 1; i >= 1; i--) {
-            sb.append(result[i]).append(" ");
+        while (!stack.isEmpty()) {
+            answer[stack.pop()] = -1;
         }
-        sb.append(result[0]);
+
+        for (int i = 0; i < n - 1; i++) {
+            sb.append(answer[i]).append(" ");
+        }
+        sb.append(answer[n - 1]);
 
         System.out.println(sb);
         br.close();
