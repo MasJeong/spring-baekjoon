@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 /**
  * 오등큰수 - 자료구조
  */
-public class _17299 {
+public class _17299_fail_timeout {
 
     private static int[] stack;
     private static int pointer = -1;
@@ -17,6 +17,10 @@ public class _17299 {
     private static void push(int val) {
         stack[++pointer] = val;
         size++;
+    }
+
+    private static void setStackSize(int length) {
+        stack = new int[length];
     }
 
     private static int pop() {
@@ -31,25 +35,29 @@ public class _17299 {
     public static void main(String[] args) throws IOException{
         final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         final StringBuilder sb = new StringBuilder();
-
         final int COUNTING_MAX_SIZE = 1000001;
 
         int n = Integer.parseInt(br.readLine());
-        stack = new int[n];
-
-        int[] arrCounting = new int[COUNTING_MAX_SIZE];
-        int[] arrOriginal = new int[n];
-        int[] arrRealOrigin = new int[n];
-
         final StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        // 원본배열 (1 1 2 3 4 2 1)
+        int[] arrOriginal = new int[n];
+        // 중간과정 배열 (3 3 2 1 1 2 3)
+        int[] arrTemp = new int[n];
+        // 카운팅 배열
+        int[] arrCounting = new int[COUNTING_MAX_SIZE];
 
-        // 카운팅 배열 생성
+        // 스택 사이즈 세팅
+        setStackSize(n);
+        
         for (int i = 1; i <= n; i++) {
             int input = Integer.parseInt(st.nextToken());
 
+            // 카운팅 배열 세팅
             arrCounting[input] += 1;
+
+            // 원본 배열 세팅
             arrOriginal[i - 1] = input;
-            arrRealOrigin[i - 1] = input;
         }
 
         /*
@@ -58,24 +66,22 @@ public class _17299 {
          * -1 -1 1 2 2 1 -1
          */
         for (int i = 0; i < n; i++) {
-            arrOriginal[i] = arrCounting[arrOriginal[i]];
-            push(arrOriginal[i]);
+            arrTemp[i] = arrCounting[arrOriginal[i]];
+            push(arrTemp[i]);
         }
 
         int[] arrResult = new int[n];
-        arrResult[0] = -1;
-        pop();
 
-        int start = size;
+        int startIdx = size;
 
-        for (int i = start - 1; i >= 1; i--) {
+        for (int i = startIdx - 1; i >= 0; i--) {
             int num = pop();
 
             boolean isFind = false;
             for(int j = i + 1; j < n; j++) {
-                if (arrOriginal[j] > num) {
+                if (arrTemp[j] > num) {
                     isFind = true;
-                    arrResult[i] = arrRealOrigin[j];
+                    arrResult[i] = arrOriginal[j];
                     break;
                 }
             }
@@ -85,9 +91,6 @@ public class _17299 {
                 arrResult[i] = -1;
             }
         }
-
-        // 마지막인덱스도 -1
-        arrResult[n - 1] = -1;
 
         for (int i = 0; i < arrResult.length - 1; i++) {
             sb.append(arrResult[i]).append(" ");
