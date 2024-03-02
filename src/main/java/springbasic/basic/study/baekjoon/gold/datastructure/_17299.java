@@ -6,16 +6,13 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * 오등큰수 - 자료구조 TODO 작업예정
+ * 오등큰수 - 자료구조
  */
 public class _17299 {
 
     private static int[] stack;
-    private static int[] memoStack;
     private static int pointer = -1;
-    private static int memoPointer = -1;
     private static int size = 0;
-    private static int memoSize = 0;
 
     private static void push(int val) {
         stack[++pointer] = val;
@@ -31,75 +28,71 @@ public class _17299 {
         return stack[pointer--];
     }
 
-    private static void memoPush(int val) {
-        memoStack[++memoPointer] = val;
-        memoSize++;
-    }
-
-    private static int memoPop() {
-        if(memoPointer < 0) {
-            return -1;
-        }
-
-        memoSize--;
-        return memoStack[memoPointer--];
-    }
-
-    private static void initMemo() {
-        memoSize++;
-        memoPointer = memoSize - 1;
-    }
-
     public static void main(String[] args) throws IOException{
         final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         final StringBuilder sb = new StringBuilder();
 
+        final int COUNTING_MAX_SIZE = 1000001;
+
         int n = Integer.parseInt(br.readLine());
         stack = new int[n];
-        memoStack = new int[n];
 
-        int[] result = new int[n];
+        int[] arrCounting = new int[COUNTING_MAX_SIZE];
+        int[] arrOriginal = new int[n];
+        int[] arrRealOrigin = new int[n];
 
         final StringTokenizer st = new StringTokenizer(br.readLine());
 
-        while (n-- > 0) {
-            push(Integer.parseInt(st.nextToken()));
+        // 카운팅 배열 생성
+        for (int i = 1; i <= n; i++) {
+            int input = Integer.parseInt(st.nextToken());
+
+            arrCounting[input] += 1;
+            arrOriginal[i - 1] = input;
+            arrRealOrigin[i - 1] = input;
         }
 
-        // 첫 번째로 빼는 값은 무조건 -1
-        int one = pop();
-        memoPush(one);
-        result[0] = -1;
+        /*
+         * 1 1 2 3 4 2 1
+         * 3 3 2 1 1 2 3 - 만드는 과정
+         * -1 -1 1 2 2 1 -1
+         */
+        for (int i = 0; i < n; i++) {
+            arrOriginal[i] = arrCounting[arrOriginal[i]];
+            push(arrOriginal[i]);
+        }
 
-        int idx = 1;
-        while (size > 0) {
-            int a = pop();
+        int[] arrResult = new int[n];
+        arrResult[0] = -1;
+        pop();
+
+        int start = size;
+
+        for (int i = start - 1; i >= 1; i--) {
+            int num = pop();
 
             boolean isFind = false;
-            while (memoSize > 0) {
-                int b = memoPop();
-                if (a < b) {
-                    result[idx++] = b;
-                    initMemo();
+            for(int j = i + 1; j < n; j++) {
+                if (arrOriginal[j] > num) {
                     isFind = true;
+                    arrResult[i] = arrRealOrigin[j];
                     break;
                 }
             }
 
-            if(!isFind) {
-                result[idx++] = -1;
-
-                // memo 스택 포인터를 다시 맨 위로 올린다.
-                initMemo();
+            // 못찾은 경우
+            if (!isFind) {
+                arrResult[i] = -1;
             }
-
-            memoPush(a);
         }
 
-        for (int i = result.length - 1; i >= 1; i--) {
-            sb.append(result[i]).append(" ");
+        // 마지막인덱스도 -1
+        arrResult[n - 1] = -1;
+
+        for (int i = 0; i < arrResult.length - 1; i++) {
+            sb.append(arrResult[i]).append(" ");
         }
-        sb.append(result[0]);
+        sb.append(arrResult[arrResult.length - 1]);
 
         System.out.println(sb);
         br.close();
