@@ -16,9 +16,9 @@ public class _1935 {
 
         int n = Integer.parseInt(br.readLine());
         String str = br.readLine();
-
-        // 배열에 수 삽입
         double[] arrDouble = new double[n];
+
+        // 배열에 요소 삽입
         for (int i = 0; i < arrDouble.length; i++) {
             arrDouble[i] = Double.parseDouble(br.readLine());
         }
