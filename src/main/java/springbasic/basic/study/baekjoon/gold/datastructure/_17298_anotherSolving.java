@@ -19,12 +19,11 @@ public class _17298_anotherSolving {
         int N = Integer.parseInt(br.readLine());
         int[] seq = new int[N];
 
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         for(int i = 0; i < N; i++) {
             seq[i] = Integer.parseInt(st.nextToken());
         }
-
 
         for(int i = 0; i < N; i++) {
 
