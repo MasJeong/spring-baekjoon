@@ -3,12 +3,12 @@ package springbasic.basic.study.baekjoon.silver.datastructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 
 /**
  * 쇠막대기 - 자료구조
+ * 이번엔 스택을 사용하지 않고 푼다.
  */
-public class _10799 {
+public class _10799_anotherSolving {
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,24 +17,24 @@ public class _10799 {
          * ()(((()())(())()))(()) -> 17
          * (((()(()()))(())()))(()()) -> 24
          */
-        Stack<Character> openStack = new Stack<>();
         String s = br.readLine();
         int answer = 0;
+        int openCount = 0;
 
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
 
             if (ch == '(') {
-                openStack.push(ch);
+                openCount++;
                 continue;
             }
 
             if (ch == ')') {
-                openStack.pop();
+                openCount--;
 
                 // isRazer true
                 if (s.charAt(i - 1) == '(') {
-                    answer += openStack.size();
+                    answer += openCount;
                 } else {
                     answer++;
                 }
