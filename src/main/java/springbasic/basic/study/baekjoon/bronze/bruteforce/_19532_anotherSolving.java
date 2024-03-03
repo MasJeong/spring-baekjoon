@@ -4,18 +4,9 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 /**
- * 연립방정식 풀이는 아래와 같다.
- * ax + by = c
- * dx + ey = f
- * 1) adx + bdy = cd
- *    adx + aey = af (x를 뺸다)
- * 2) bdy - aey = cd - af
- *    (bd - ae)y = cd - af
- *    y = (cd - af) / (bd - ae)
- * x는 y와 같이 구한다.
- *    x = (ce - bf) / (ae - bd)
+ * 수학은 비대면강의입니다. - 수학 및 브루트포스
  */
-public class _19532 {
+public class _19532_anotherSolving {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -31,7 +22,6 @@ public class _19532 {
 
         Loop1:
         for(int i = -999; i <= 999; i++)
-            Loop2:
             for(int j = -999; j <= 999; j++)
                 if((a * i + b * j == c) && (d * i + e * j == f)) {
                     bw.write(i + " " + j);
