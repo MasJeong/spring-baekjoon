@@ -14,37 +14,30 @@ public class _17299_remind {
     public static void main(String[] args) throws IOException{
         final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         final StringBuilder sb = new StringBuilder();
-        final int COUNTING_MAX_SIZE = 1000001;
 
         int n = Integer.parseInt(br.readLine());
-        final StringTokenizer st = new StringTokenizer(br.readLine());
-
-        Stack<Integer> stack = new Stack<>();
-        // 원본배열
-        int[] arrOriginal = new int[n];
-        // 카운팅 배열
-        int[] arrCounting = new int[COUNTING_MAX_SIZE];
-        // 결과 배열
+        int[] seq = new int[n];
+        int[] counting = new int[1000001];
         int[] answer = new int[n];
+        Stack<Integer> stack = new Stack<>();
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         /*
-         * 1 1 2 3 4 2 1 - 원본
-         * 3 3 2 1 1 2 3 - 카운팅
+         * 1 1 2 3 4 2 1
+         * 3 3 2 1 1 2 3
          * -1 -1 1 2 2 1 -1
          */
-        for (int i = 0; i < n; i++) {
-            int input = Integer.parseInt(st.nextToken());
 
-            // 원본 배열 세팅
-            arrOriginal[i] = input;
-
-            // 카운팅 배열 세팅
-            arrCounting[arrOriginal[i]]++;
+        // 원본 배열
+        for (int i = 0; i < seq.length; i++) {
+            seq[i] = Integer.parseInt(st.nextToken());
+            counting[seq[i]]++;
         }
 
-        for(int i = 0; i < n; i++) {
-            while(!stack.isEmpty() && arrCounting[arrOriginal[stack.peek()]] < arrCounting[arrOriginal[i]]) {
-                answer[stack.pop()] = arrOriginal[i];
+        for (int i = 0; i < seq.length; i++) {
+            while (!stack.isEmpty() && counting[seq[stack.peek()]] < counting[seq[i]]) {
+                answer[stack.pop()] = seq[i];
             }
 
             stack.push(i);
