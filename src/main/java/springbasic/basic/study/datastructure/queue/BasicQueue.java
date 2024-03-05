@@ -22,6 +22,7 @@ public class BasicQueue {
     }
 
     private static int pop(int[] queue) {
+        // 데이터 없는 경우
         if(front > rear) {
             return -1;
         }
