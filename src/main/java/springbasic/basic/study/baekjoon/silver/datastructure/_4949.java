@@ -86,6 +86,7 @@ public class _4949 {
             } else {
                 sb.append("no").append("\n");
             }
+
         }
 
         System.out.println(sb);
