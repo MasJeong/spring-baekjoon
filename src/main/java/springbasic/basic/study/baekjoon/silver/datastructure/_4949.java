@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
  */
 public class _4949 {
 
-    private static final char[] stack = new char[100];
+    private static char[] stack;
 
     private static int pointer = -1;
 
@@ -33,31 +33,58 @@ public class _4949 {
         return size == 0;
     }
 
+    private static void initStack(int resize) {
+        size = 0;
+        pointer = -1;
+        stack = new char[resize];
+    }
+
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
         String str;
+        while ((str = br.readLine()) != null && !str.isEmpty()) {
+            // 스택 초기화
+            initStack(str.length());
 
-        while ((str = br.readLine()) != null) {
+            boolean isError = false;
             for (int i = 0; i < str.length(); i++) {
                 char ch = str.charAt(i);
 
-                if (ch == '(') {
+                if (ch == '(' || ch == '[') {
                     push(ch);
                 } else if (ch == ')') {
                     char data = pop();
 
                     // pop 실패 시
                     if(data == '\0') {
-                        sb.append("no");
+                        isError = true;
                         break;
+                    }
+
+                    if(data != '(') {
+                        push(data);
+                    }
+                } else if (ch == ']') {
+                    char data = pop();
+
+                    // pop 실패 시
+                    if(data == '\0') {
+                        isError = true;
+                        break;
+                    }
+
+                    if(data != '[') {
+                        push(data);
                     }
                 }
             }
 
-            if (isEmpty()) {
-                sb.append("yes");
+            if (isEmpty() && !isError) {
+                sb.append("yes").append("\n");
+            } else {
+                sb.append("no").append("\n");
             }
         }
 
