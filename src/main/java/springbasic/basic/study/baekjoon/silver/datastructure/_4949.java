@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * 균형잡힌세상 TODO 작업중
+ * 균형잡힌세상 - 스택 큐 덱
  */
 public class _4949 {
 
@@ -44,7 +44,7 @@ public class _4949 {
         StringBuilder sb = new StringBuilder();
 
         String str;
-        while ((str = br.readLine()) != null && !str.isEmpty()) {
+        while ((str = br.readLine()) != null && !str.isEmpty() && !".".equals(str)) {
             // 스택 초기화
             initStack(str.length());
 
@@ -55,28 +55,20 @@ public class _4949 {
                 if (ch == '(' || ch == '[') {
                     push(ch);
                 } else if (ch == ')') {
-                    char data = pop();
+                    char popData = pop();
 
                     // pop 실패 시
-                    if(data == '\0') {
+                    if(popData != '(') {
                         isError = true;
                         break;
-                    }
-
-                    if(data != '(') {
-                        push(data);
                     }
                 } else if (ch == ']') {
-                    char data = pop();
+                    char popData = pop();
 
                     // pop 실패 시
-                    if(data == '\0') {
+                    if(popData != '[') {
                         isError = true;
                         break;
-                    }
-
-                    if(data != '[') {
-                        push(data);
                     }
                 }
             }
